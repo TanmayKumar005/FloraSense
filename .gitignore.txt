@@ -1,0 +1,17 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# React
+node_modules/
+
+# ML dataset
+training/PlantVillage/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
