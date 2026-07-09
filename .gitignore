@@ -1,17 +1,13 @@
 # Python
 api/.venv/
-venv/
-__pycache__/
+api/__pycache__/
 *.pyc
 
 # React
-node_modules/
+frontend/node_modules/
 
-# ML dataset
+# Training data
 training/PlantVillage/
-
-# Jupyter
-.ipynb_checkpoints/
 
 # Environment
 .env
