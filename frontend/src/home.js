@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import logo from "./cblogo.png";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import React from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import {  CardActionArea, CardMedia, Grid,  Button, CircularProgress } from "@material-ui/core";
@@ -475,7 +474,7 @@ export const ImageUpload = () => {
   const [isLoading, setIsloading] = useState(false);
   let confidence = 0;
 
- const sendFile = async () => {
+const sendFile = useCallback(async () => {
   if (!selectedFile) return;
 
   try {
@@ -488,14 +487,13 @@ export const ImageUpload = () => {
     );
 
     console.log(res.data);
-
     setData(res.data);
   } catch (err) {
     console.error(err);
   } finally {
     setIsloading(false);
   }
-};
+}, [selectedFile]);
 
   const clearData = () => {
     setData(null);
@@ -513,13 +511,13 @@ export const ImageUpload = () => {
     setPreview(objectUrl);
   }, [selectedFile]);
 
-  useEffect(() => {
-    if (!preview) {
-      return;
-    }
-    setIsloading(true);
-    sendFile();
-  }, [preview]);
+useEffect(() => {
+  if (!preview) {
+    return;
+  }
+  setIsloading(true);
+  sendFile();
+}, [preview, sendFile]);
 
   const onSelectFile = (files) => {
     if (!files || files.length === 0) {
